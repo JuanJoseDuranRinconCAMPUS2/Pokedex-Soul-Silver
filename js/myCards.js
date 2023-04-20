@@ -1,5 +1,6 @@
 let URL = "https://pokeapi.co/api/v2/pokemon/";
-
+let pokedexInicial = 0;
+let pokedexFinal = 0;
 
 
 
@@ -23,15 +24,41 @@ export default{
             const region = document.querySelector("#region");
             var regionValoe = region.value;
             addEventListener("change", (e)=>{
+
+                remover();
                 regionValoe = region.value;
-                console.log(regionValoe);
+
+                switch (regionValoe) {
+                    case "Kanto":
+                            pokedexInicial = 1;
+                            pokedexFinal = 151;
+                            console.log("gsf");
+                            calculo();
+
+                        break;
+                    case "Johto":
+                            remover();
+                            pokedexInicial = 152;
+                            pokedexFinal = 251;
+                            calculo();
+                        break; 
+                }
+                function remover() {
+                    var divPokemons = document.querySelectorAll(".pokemon");
+                    console.log(divPokemons);
+                    divPokemons.remove;
+                };
             })
-            for (let i = 494; i <= 649; i++) {
+          }, 500);
+          function calculo() {
+            for (let i = pokedexInicial; i <= pokedexFinal; i++) {
                 fetch(URL + i)
                     .then((response) => response.json())
                     .then(data => mostrarPokemon(data))
             }
-          }, 500);
+        };
+
+        
         
         function mostrarPokemon(poke) {
             let tipos = poke.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`);
