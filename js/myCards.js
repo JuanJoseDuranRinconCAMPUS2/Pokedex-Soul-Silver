@@ -21,8 +21,11 @@ export default{
         
         setTimeout(() => {
             const region = document.querySelector("#region");
-            let regionValoe = region.value
-            console.log(regionValoe)
+            var regionValoe = region.value;
+            addEventListener("change", (e)=>{
+                regionValoe = region.value;
+                console.log(regionValoe);
+            })
             for (let i = 494; i <= 649; i++) {
                 fetch(URL + i)
                     .then((response) => response.json())
