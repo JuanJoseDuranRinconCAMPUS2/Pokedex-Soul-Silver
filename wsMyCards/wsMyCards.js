@@ -15,6 +15,7 @@ export let wsMyCards = {
             <option value="Kalos">Kalos</option>
             <option value="Alola">Alola</option>
             <option value="Galar">Galar</option>
+            <option value="Hisui">Hisui</option>
             <option value="Paldea">Paldea</option>
 
 
@@ -63,8 +64,9 @@ export let wsMyCards = {
                     ${p1.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`)}
                 </div>
                 <div class="pokemon-stats">
-                    <p class="stat">${p1.height}m</p>
-                    <p class="stat">${p1.weight}kg</p>
+                    <p class="stat">${(p1.height)/10}m</p>
+                    <!--Dato curioso de Un friky del pokemon: la pokeApi tiene un error con el peso y altura de los pokemons, el verdadero peso se consigue al dividir la data proporcionada por la api en 10 :4-->
+                    <p class="stat">${(p1.weight)/10}kg</p>
                 </div>
             </div>
         <div>
