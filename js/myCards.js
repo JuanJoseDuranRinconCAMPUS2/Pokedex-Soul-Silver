@@ -1,8 +1,5 @@
-let URL = "https://pokeapi.co/api/v2/pokemon/";
 let pokedexInicial = 0;
 let pokedexFinal = 0;
-
-
 
 export default{
     showHeader(){
@@ -34,7 +31,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 1;
                                 pokedexFinal = 151;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                     break;
                     case "Johto":
@@ -42,7 +39,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 152;
                                 pokedexFinal = 251;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);   
                     break;
                     case "Hoenn":
@@ -50,7 +47,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 252;
                                 pokedexFinal = 386;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);      
                     break;
                      case "Sinnoh":
@@ -58,7 +55,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 387;
                                 pokedexFinal = 493;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break; 
                      case "Teselia":
@@ -66,7 +63,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 494;
                                 pokedexFinal = 649;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break;
                      case "Kalos":
@@ -74,7 +71,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 650;
                                 pokedexFinal = 721;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break; 
                      case "Alola":
@@ -82,7 +79,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 722;
                                 pokedexFinal = 809;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break;
                      case "Galar":
@@ -90,7 +87,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 810;
                                 pokedexFinal = 898;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break;
                      case "Hisui":
@@ -98,7 +95,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 899;
                                 pokedexFinal = 905;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break;
                      case "Paldea":
@@ -106,7 +103,7 @@ export default{
                             setTimeout(() => {
                                 pokedexInicial = 906;
                                 pokedexFinal = 1009;
-                                calculo();
+                                getPokemons(pokedexInicial, pokedexFinal);
                             }, 100);
                      break;
                 }
@@ -117,21 +114,20 @@ export default{
                       }
                 };
             })
-          }, 500);
-          function calculo() {
+          }, 300);
+         
 
-            for (let i = pokedexInicial; i <= pokedexFinal; i++) {
-                fetch(URL + i)
-                    .then((response) => response.json())
-                    .then(data => mostrarPokemon(data))
-                    
-            }
-        };
-
+            async function getPokemons(pokedexInicial, pokedexFinal) {
+                const URL = "https://pokeapi.co/api/v2/pokemon/";
+                for (let i = pokedexInicial; i <= pokedexFinal; i++) {
+                  const response = await fetch(URL + i);
+                  const data = await response.json();
+                  mostrarPokemon(data);
+                }
+              }
         
         
         function mostrarPokemon(poke) {
-            console.log(poke);
             let tipos = poke.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`);
             tipos = tipos.join('');
 
