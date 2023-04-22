@@ -49,11 +49,12 @@ export let wsMyCards = {
 
     displaycards(p1){
         
+
         return `
         <div class="pokemon">
             <p class="pokemon-id-back">#${p1.id}</p>
             <div class="pokemon-imagen">
-            <img src="${p1.sprites.other["official-artwork"].front_default}" alt="${p1.name}">
+            <img src="${(p1.id >= 650 && p1.id <= 905) ? p1.sprites.other.home.front_default :  (p1.id <= 649 ? p1.sprites.versions["generation-v"]["black-white"].animated.front_default : p1.sprites.other["official-artwork"].front_default)}" alt="${p1.name}" width="50px">
             </div>
             <div class="pokemon-info">
                 <div class="nombre-contenedor">

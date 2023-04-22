@@ -124,6 +124,7 @@ export default{
                 fetch(URL + i)
                     .then((response) => response.json())
                     .then(data => mostrarPokemon(data))
+                    
             }
         };
 
@@ -138,7 +139,7 @@ export default{
             const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
             let id = [];
             let count= 0;
-       
+            
             ws.postMessage({module: "displaycards", data: poke})
             id = ["#listaPokemon"]
             ws.addEventListener("message", (e)=>{
@@ -163,7 +164,7 @@ const botonesHeader = document.querySelectorAll(".btn-header");
 
 botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
     const botonId = event.currentTarget.id;
-
+    console.log(boton);
     listaPokemon.innerHTML = "";
 
     for (let i = 494; i <= 649; i++) {
