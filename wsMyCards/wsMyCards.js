@@ -6,7 +6,7 @@ export let wsMyCards = {
         <img src="./img/Pokédex_3D.png" alt="Logo Pokédex">
     
         <select id="region">
-            <option value="null">Selecciona una region</option>
+            <option value="seleciona">Selecciona una region</option>
             <option value="Kanto">Kanto</option>
             <option value="Johto">Johto</option>
             <option value="Hoenn">Hoenn</option>

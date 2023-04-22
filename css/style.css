@@ -94,8 +94,23 @@ header {
     box-shadow: 0 0 2rem rgba(0, 0, 0, .25);
 }
 
+.btn-header:disabled{
+    animation-name: titileo;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
 
-
+  @keyframes titileo {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 main {
     padding: 2rem;
     max-width: 1000px;
@@ -306,3 +321,6 @@ main {
     background-color: var(--type-fairy);
     color: var(--clr-black);
 }
+
+
+  

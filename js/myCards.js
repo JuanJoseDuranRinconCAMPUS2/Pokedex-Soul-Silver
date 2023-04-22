@@ -1,6 +1,21 @@
 let pokedexInicial = 0;
 let pokedexFinal = 0;
-
+const remover = function remover() {
+    var divPokemons = document.querySelectorAll(".pokemon");
+    for (var i = 0; i < divPokemons.length; i++) {
+        divPokemons[i].remove();
+      }
+}
+const cooldownRegion = function cooldownRegion() {setTimeout(() => {region.disabled = false;}, 3000)};
+const cooldownElemental = function cooldownElemental(boton) {setTimeout(() => {boton.disabled = false;}, 3000)};
+const desactivateElemental = function desactivateElemental(botonesHeader) {
+    botonesHeader.forEach((boton) => {
+        boton.disabled = true;
+        setTimeout(() => {
+            cooldownElemental(boton);  
+        }, 100);
+      });
+}
 export default{
     showHeader(){
         const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
@@ -19,20 +34,20 @@ export default{
         
         setTimeout(() => {
             const region = document.querySelector("#region");
+            const botonesHeader = document.querySelectorAll(".btn-header");
             var regionValoe = region.value;
-            addEventListener("change", (e)=>{
-
-               
+            addEventListener("change", (e)=>{ 
                 regionValoe = region.value;
-                
                 switch (regionValoe) {
+                    
                     case "Kanto":
                             remover();
                             setTimeout(() => {
                                 pokedexInicial = 1;
                                 pokedexFinal = 151;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                     break;
                     case "Johto":
@@ -41,7 +56,8 @@ export default{
                                 pokedexInicial = 152;
                                 pokedexFinal = 251;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);   
                     break;
                     case "Hoenn":
@@ -50,7 +66,8 @@ export default{
                                 pokedexInicial = 252;
                                 pokedexFinal = 386;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);      
                     break;
                      case "Sinnoh":
@@ -59,7 +76,8 @@ export default{
                                 pokedexInicial = 387;
                                 pokedexFinal = 493;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break; 
                      case "Teselia":
@@ -68,7 +86,8 @@ export default{
                                 pokedexInicial = 494;
                                 pokedexFinal = 649;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break;
                      case "Kalos":
@@ -77,7 +96,8 @@ export default{
                                 pokedexInicial = 650;
                                 pokedexFinal = 721;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break; 
                      case "Alola":
@@ -86,7 +106,8 @@ export default{
                                 pokedexInicial = 722;
                                 pokedexFinal = 809;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break;
                      case "Galar":
@@ -95,7 +116,8 @@ export default{
                                 pokedexInicial = 810;
                                 pokedexFinal = 898;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break;
                      case "Hisui":
@@ -105,6 +127,7 @@ export default{
                                 pokedexFinal = 905;
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 region.disabled = false;
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break;
                      case "Paldea":
@@ -113,18 +136,33 @@ export default{
                                 pokedexInicial = 906;
                                 pokedexFinal = 1009;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                setTimeout(() => {region.disabled = false;}, 3000);
+                                cooldownRegion();
+                                desactivateElemental(botonesHeader);
                             }, 100);
                      break;
                 }
                 region.disabled = true;
-                function remover() {
-                    var divPokemons = document.querySelectorAll(".pokemon");
-                    for (var i = 0; i < divPokemons.length; i++) {
-                        divPokemons[i].remove();
-                      }
-                };
+                
             })
+        
+            botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
+                
+                const botonId = event.currentTarget.id;
+                botonesHeader.forEach((boton) => {
+                    boton.disabled = true;
+                    region.disabled = true;
+                    setTimeout(() => {
+                        cooldownElemental(boton);  
+                    }, 100);
+                  });
+                remover();
+                setTimeout(() => {
+                    typePokemons(pokedexInicial, pokedexFinal, botonId);
+                    cooldownRegion();         
+                }, 100);
+            
+               
+            }))
           }, 300);
          
 
@@ -136,6 +174,25 @@ export default{
                   mostrarPokemon(data);
                 }
               }
+
+            async function typePokemons(pokedexInicial, pokedexFinal, botonId) {
+                const URL = "https://pokeapi.co/api/v2/pokemon/";
+                for (let i = pokedexInicial; i <= pokedexFinal; i++) {
+                    fetch(URL + i)
+                    const response = await fetch(URL + i);
+                    const data = await response.json();
+            
+                    if(botonId === "ver-todos") {
+                        mostrarPokemon(data);
+                    } else {
+                        const tipos = data.types.map(type => type.type.name);
+                        if (tipos.some(tipo => tipo.includes(botonId))) {
+                            mostrarPokemon(data);
+                            }
+                        }
+            
+                 }
+            }
         
         
         function mostrarPokemon(poke) {
@@ -158,35 +215,12 @@ export default{
             });
         }
         
-       
     } 
        
 }
 
 
 
-const botonesHeader = document.querySelectorAll(".btn-header");
 
 
-botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
-    const botonId = event.currentTarget.id;
-    console.log(boton);
-    listaPokemon.innerHTML = "";
 
-    for (let i = 494; i <= 649; i++) {
-        fetch(URL + i)
-            .then((response) => response.json())
-            .then(data => {
-
-                if(botonId === "ver-todos") {
-                    mostrarPokemon(data);
-                } else {
-                    const tipos = data.types.map(type => type.type.name);
-                    if (tipos.some(tipo => tipo.includes(botonId))) {
-                        mostrarPokemon(data);
-                    }
-                }
-
-            })
-    }
-}))
