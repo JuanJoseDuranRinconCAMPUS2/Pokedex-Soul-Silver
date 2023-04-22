@@ -32,6 +32,7 @@ export default{
                                 pokedexInicial = 1;
                                 pokedexFinal = 151;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                     break;
                     case "Johto":
@@ -40,6 +41,7 @@ export default{
                                 pokedexInicial = 152;
                                 pokedexFinal = 251;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);   
                     break;
                     case "Hoenn":
@@ -48,6 +50,7 @@ export default{
                                 pokedexInicial = 252;
                                 pokedexFinal = 386;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);      
                     break;
                      case "Sinnoh":
@@ -56,6 +59,7 @@ export default{
                                 pokedexInicial = 387;
                                 pokedexFinal = 493;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                      break; 
                      case "Teselia":
@@ -64,6 +68,7 @@ export default{
                                 pokedexInicial = 494;
                                 pokedexFinal = 649;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                      break;
                      case "Kalos":
@@ -72,6 +77,7 @@ export default{
                                 pokedexInicial = 650;
                                 pokedexFinal = 721;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                      break; 
                      case "Alola":
@@ -80,6 +86,7 @@ export default{
                                 pokedexInicial = 722;
                                 pokedexFinal = 809;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                      break;
                      case "Galar":
@@ -88,6 +95,7 @@ export default{
                                 pokedexInicial = 810;
                                 pokedexFinal = 898;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                      break;
                      case "Hisui":
@@ -96,6 +104,7 @@ export default{
                                 pokedexInicial = 899;
                                 pokedexFinal = 905;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                region.disabled = false;
                             }, 100);
                      break;
                      case "Paldea":
@@ -104,9 +113,11 @@ export default{
                                 pokedexInicial = 906;
                                 pokedexFinal = 1009;
                                 getPokemons(pokedexInicial, pokedexFinal);
+                                setTimeout(() => {region.disabled = false;}, 3000);
                             }, 100);
                      break;
                 }
+                region.disabled = true;
                 function remover() {
                     var divPokemons = document.querySelectorAll(".pokemon");
                     for (var i = 0; i < divPokemons.length; i++) {
@@ -154,7 +165,6 @@ export default{
 
 
 
-const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 
 
