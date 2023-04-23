@@ -6,7 +6,7 @@ const remover = function remover() {
         divPokemons[i].remove();
       }
 }
-const cooldownRegion = function cooldownRegion() {setTimeout(() => {region.disabled = false; console.log("tiempo terminao");}, 5000)};
+const cooldownRegion = function cooldownRegion() {setTimeout(() => {region.disabled = false;}, 5000)};
 const cooldownElemental = function cooldownElemental(boton) {setTimeout(() => {boton.disabled = false;}, 5000)};
 const desactivateElemental = function desactivateElemental(botonesHeader) {botonesHeader.forEach((boton) => {boton.disabled = true;setTimeout(() => {cooldownElemental(boton); }, 100);});
 }
@@ -224,7 +224,27 @@ export default{
             (id.length-1==0) ? ws.terminate(): count++;
             });
         }
+
+        /* Apartado para el modo noche y dia*/
         
+        const imageSection = document.getElementById('fondo');
+        const headerSection = document.getElementById('header');
+        const btnLunala = document.getElementById('btn-lunala');
+        const btnSolgaleo = document.getElementById('btn-solgaleo');
+        intercambio.addEventListener('click',()=>{
+            panel.classList.toggle('active');
+        })
+
+        btnSolgaleo.addEventListener('click',()=>{
+            imageSection.style.backgroundImage = "url('./css/fondosolgaleo.jpg')";
+            headerSection.style.backgroundImage = "url('./css/ultrasol.jpg')";
+            
+        })
+
+        btnLunala.addEventListener('click',()=>{
+            imageSection.style.backgroundImage = "url('./css/fondolunala.jpg')";
+            headerSection.style.backgroundImage = "url('./css/ultraluna.jpg')";
+        })
     } 
        
 }

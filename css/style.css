@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
+section{
+    background-image: url('fondosolgaleo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    --colorPulse1 : rgba(0, 0, 0, 0.85);
+    --colorPulse2 : rgba(0, 0, 0, 0);
+    --colorCard: rgba(255, 255, 255, 0.2);
+    --colorTextoCard: #000;
+    --sombraTexto: 2px 2px 5px rgb(17, 215, 250);
+    --colorPanel:  rgba(255, 255, 255, 0.4);
+    --sombraPanel: rgba(0, 0, 0, 1);
+    --hoverCard: rgba(255, 255, 255, 0.5);
+}
+
+
 :root {
     --clr-black: #1c1c1c;
     --clr-gray: #ececec;
@@ -47,9 +63,11 @@ button {
 
 body {
     min-height: 100vh;
-    background-color: var(--clr-gray);
 }
-
+.pokemon-divider {
+    height: 20px;
+    background: linear-gradient(to right, #FFCB05, #E82C2C, #5173F1, #49D0B0);
+  }
 .nav img{
     width: 80%;
     display: block;
@@ -59,6 +77,11 @@ body {
 header {
     padding-block: 1rem;
     box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, .5);
+    background-image: url('ultrasol.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+
 }
 
 .nav {
@@ -297,6 +320,8 @@ select {
     transition: all calc(1s * 0.5) linear;
   }
   
+ 
+
   .input {
     background: transparent;
     border-radius: 50%;
@@ -409,6 +434,94 @@ select {
       transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
     }
   }
+
+
+  .container-intercambio{
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+}
+
+.container-intercambio .panel{
+    position: absolute;
+    background-color: var(--colorPanel);
+    transition: .3s all;
+    box-shadow: 1px 1px 5px var(--sombraPanel);
+    width: 90px;
+    height: 180px;
+    border-radius: 15px;
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    display: none;
+}
+
+.container-intercambio .panel.active{
+    display: flex;
+}
+
+.container-intercambio .panel .oscuro{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #fff;
+    background-color: black;
+    transition: .3 all;
+}
+
+.container-intercambio .panel .claro{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #fff;
+    background-color: yellow;
+    transition: .3 all;
+}
+
+
+.container-intercambio .intercambio{
+    cursor: pointer;
+    border-radius: 50%;
+    width: 70px;
+    filter: sepia(50%);
+    transition: .4s ease;
+    animation: pulse 1.5s infinite;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.container-intercambio .intercambio:hover{
+    filter: sepia(0);
+    transition: .4s ease;
+}
+
+@keyframes pulse{
+    0%{
+        box-shadow: 0 0 0 0 var(--colorPulse1);
+    }
+    50%{
+        box-shadow: 0 0 0 25px var(--colorPulse2);
+    }
+    100%{
+        box-shadow: 0 0 0 0 var(--colorPulse2);
+    }
+}
+
+@media (min-width: 1000px){
+    .container-card{
+        display: flex;
+    }
+    .card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
 
 /* Aquí comienzan los colores de botones según tipo */
 .normal {
