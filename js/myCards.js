@@ -6,15 +6,9 @@ const remover = function remover() {
         divPokemons[i].remove();
       }
 }
-const cooldownRegion = function cooldownRegion() {setTimeout(() => {region.disabled = false;}, 3000)};
-const cooldownElemental = function cooldownElemental(boton) {setTimeout(() => {boton.disabled = false;}, 3000)};
-const desactivateElemental = function desactivateElemental(botonesHeader) {
-    botonesHeader.forEach((boton) => {
-        boton.disabled = true;
-        setTimeout(() => {
-            cooldownElemental(boton);  
-        }, 100);
-      });
+const cooldownRegion = function cooldownRegion() {setTimeout(() => {region.disabled = false; console.log("tiempo terminao");}, 5000)};
+const cooldownElemental = function cooldownElemental(boton) {setTimeout(() => {boton.disabled = false;}, 5000)};
+const desactivateElemental = function desactivateElemental(botonesHeader) {botonesHeader.forEach((boton) => {boton.disabled = true;setTimeout(() => {cooldownElemental(boton); }, 100);});
 }
 export default{
     showHeader(){
@@ -144,7 +138,7 @@ export default{
                 region.disabled = true;
                 
             })
-        
+            
             botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
                 
                 const botonId = event.currentTarget.id;
@@ -153,6 +147,7 @@ export default{
                     region.disabled = true;
                     setTimeout(() => {
                         cooldownElemental(boton);  
+                        
                     }, 100);
                   });
                 remover();
@@ -163,7 +158,19 @@ export default{
             
                
             }))
-          }, 300);
+
+                
+                const mybusqueda = document.querySelector("#busqueda");
+                mybusqueda.addEventListener("submit",(e)=>{
+                    e.preventDefault();
+                    remover();
+                    let data = Object.fromEntries(new FormData(e.target));
+                    getBusqueda(data.pokemonSelect);
+                    cooldownRegion();
+                    
+                });
+                
+          }, 100);
          
 
             async function getPokemons(pokedexInicial, pokedexFinal) {
@@ -193,12 +200,15 @@ export default{
             
                  }
             }
-        
+            
+            async function getBusqueda(pokemon) {
+                const URL = "https://pokeapi.co/api/v2/pokemon/";
+                const response = await fetch(URL + pokemon);
+                  const data = await response.json();
+                  mostrarPokemon(data);
+              }
         
         function mostrarPokemon(poke) {
-            let tipos = poke.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`);
-            tipos = tipos.join('');
-
         
             const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
             let id = [];

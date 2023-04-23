@@ -6,7 +6,7 @@ export let wsMyCards = {
         <img src="./img/Pokédex_3D.png" alt="Logo Pokédex">
     
         <select id="region">
-            <option value="seleciona">Selecciona una region</option>
+            <option value="seleciona" id="regiones">Selecciona una region</option>
             <option value="Kanto">Kanto</option>
             <option value="Johto">Johto</option>
             <option value="Hoenn">Hoenn</option>
@@ -43,11 +43,45 @@ export let wsMyCards = {
             <li class="nav-item"><button class="btn btn-header steel" id="steel"><img src="./img/acero.png" id="icon"></button></li>
             <li class="nav-item"><button class="btn btn-header fairy" id="fairy"><img src="./img/fairy.png" id="icon"></button></li>
         </ul>
+
+        <form id="busqueda">
+            <label for="search">Search</label>
+            <input required="" type="text" class="input" id="search" name="pokemonSelect">
+            <span class="caret"></span>
+        </form>
+
     </nav>
         `
     },
 
     displaycards(p1){
+        
+
+        return `
+        <div class="pokemon">
+            <p class="pokemon-id-back">#${p1.id}</p>
+            <div class="pokemon-imagen">
+            <img src="${(p1.id >= 650 && p1.id <= 905) ? p1.sprites.other.home.front_default :  (p1.id <= 649 ? p1.sprites.versions["generation-v"]["black-white"].animated.front_default : p1.sprites.other["official-artwork"].front_default)}" alt="${p1.name}" width="50px">
+            </div>
+            <div class="pokemon-info">
+                <div class="nombre-contenedor">
+                    <p class="pokemon-id">#${p1.id}</p>
+                    <h2 class="pokemon-nombre">${p1.name}</h2>
+                </div>
+                <div class="pokemon-tipos">
+                    ${p1.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`)}
+                </div>
+                <div class="pokemon-stats">
+                    <p class="stat">${(p1.height)/10}m</p>
+                    <!--Dato curioso de Un friky del pokemon: la pokeApi tiene un error con el peso y altura de los pokemons, el verdadero peso se consigue al dividir la data proporcionada por la api en 10 :4-->
+                    <p class="stat">${(p1.weight)/10}kg</p>
+                </div>
+            </div>
+        <div>
+        `
+    },
+
+    displaycardsSearch(p1){
         
 
         return `
