@@ -42,7 +42,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                     break;
                     case "Johto":
                         remover();
@@ -52,7 +52,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);   
+                            }, 0);   
                     break;
                     case "Hoenn":
                         remover();
@@ -62,7 +62,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);      
+                            }, 0);      
                     break;
                      case "Sinnoh":
                         remover();
@@ -72,7 +72,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break; 
                      case "Teselia":
                         remover();
@@ -82,7 +82,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break;
                      case "Kalos":
                         remover();
@@ -92,7 +92,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break; 
                      case "Alola":
                         remover();
@@ -102,7 +102,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break;
                      case "Galar":
                         remover();
@@ -112,7 +112,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break;
                      case "Hisui":
                         remover();
@@ -122,7 +122,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 region.disabled = false;
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break;
                      case "Paldea":
                         remover();
@@ -132,7 +132,7 @@ export default{
                                 getPokemons(pokedexInicial, pokedexFinal);
                                 cooldownRegion();
                                 desactivateElemental(botonesHeader);
-                            }, 100);
+                            }, 0);
                      break;
                 }
                 region.disabled = true;
@@ -170,7 +170,7 @@ export default{
                     
                 });
                 
-          }, 100);
+          }, 90);
          
 
             async function getPokemons(pokedexInicial, pokedexFinal) {
