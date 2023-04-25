@@ -43,13 +43,6 @@ export let wsMyCards = {
             <li class="nav-item"><button class="btn btn-header steel" id="steel"><img src="./img/acero.png" id="icon"></button></li>
             <li class="nav-item"><button class="btn btn-header fairy" id="fairy"><img src="./img/fairy.png" id="icon"></button></li>
         </ul>
-
-        <form id="busqueda">
-            <label for="search">Search</label>
-            <input required="" type="text" class="input" id="search" name="pokemonSelect">
-            <span class="caret"></span>
-        </form>
-
     </nav>
         `
     },
@@ -91,7 +84,7 @@ export let wsMyCards = {
                 <div class="modal-content">
                     <span class="close">&times;</span>
                             <div class="texto-container">
-                                <h1>${p1.name}</h1>
+                                <h1 style="color:${p1.color.name}">${p1.name}</h1>
                                 ${p1.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`)}
                             </div>
                             <br>
@@ -106,6 +99,7 @@ export let wsMyCards = {
                                 <span class="image-text">Forma Variocolor</span>
                             </div>
                             </div>
+                         
                             <div class="pokemon-tipos">
                             </div>
                             <div class="contenedor">
@@ -178,12 +172,20 @@ export let wsMyCards = {
                                 </div>
         `
     },
-
+    displaySearch(p1){
+        return`
+        <form id="busqueda">
+            <label for="search">Search</label>
+            <input required="" type="text" class="input" id="search" name="pokemonSelect">
+            <span class="caret"></span>
+        </form>
+        `
+    },
     displaycardsSearch(p1){
         
 
         return `
-        <div class="pokemon">
+        <div class="pokemon2">
             <p class="pokemon-id-back">#${p1.id}</p>
             <div class="pokemon-imagen">
             <img src="${(p1.id >= 650 && p1.id <= 905) ? p1.sprites.other.home.front_default :  (p1.id <= 649 ? p1.sprites.versions["generation-v"]["black-white"].animated.front_default : p1.sprites.other["official-artwork"].front_default)}" alt="${p1.name}" width="50px">
@@ -201,6 +203,7 @@ export let wsMyCards = {
                     <!--Dato curioso de Un friky del pokemon: la pokeApi tiene un error con el peso y altura de los pokemons, el verdadero peso se consigue al dividir la data proporcionada por la api en 10 :4-->
                     <p class="stat">${(p1.weight)/10}kg</p>
                 </div>
+                <button class="btn modalBtn" id="${p1.id}" type="submit">Abrir Modal</button>
             </div>
         <div>
         `

@@ -22,7 +22,8 @@ export default{
         let id = [];
         let count= 0;
         ws.postMessage({module: "displayHeader", data: this.data})
-        id = ["#header"]
+        ws.postMessage({module: "displaySearch", data: this.data})
+        id = ["#header", "#mySearch"]
         ws.addEventListener("message", (e)=>{
         
         let doc = new DOMParser().parseFromString(e.data, "text/html");
@@ -136,7 +137,6 @@ export default{
                                 pokedexInicial = 906;
                                 pokedexFinal = 1009;
                                 getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
                                 desactivateElemental(botonesHeader);
                             }, 0);
                      break;
@@ -166,14 +166,16 @@ export default{
             }))
 
                 
-                const mybusqueda = document.querySelector("#busqueda");
-                mybusqueda.addEventListener("submit",(e)=>{
-                    e.preventDefault();
-                    remover();
-                    let data = Object.fromEntries(new FormData(e.target));
-                    getBusqueda(data.pokemonSelect);
-                    cooldownRegion();
-                    
+            const mybusqueda = document.querySelector("#busqueda");
+            mybusqueda.addEventListener("click", (e)=>{
+                e.preventDefault();
+            })
+            
+            mybusqueda.addEventListener("submit",(e)=>{
+                e.preventDefault();
+                let data = Object.fromEntries(new FormData(e.target));
+                getBusqueda(data.pokemonSelect);
+                cooldownRegion();
                 });
                 
           }, 90);
@@ -210,13 +212,19 @@ export default{
                         }
             
                  }
+                 setTimeout(() => {
+                    modalClick();
+                    }, 100);
             }
             
             async function getBusqueda(pokemon) {
                 const URL = "https://pokeapi.co/api/v2/pokemon/";
                 const response = await fetch(URL + pokemon);
                   const data = await response.json();
-                  mostrarPokemon(data);
+                  mostrarPokemonSearch(data);
+                  setTimeout(() => {
+                    modalClick();
+                    }, 100);
               }
 
               async function modalClick() {
@@ -224,7 +232,6 @@ export default{
                 console.log(openModal);
                 openModal.forEach(boton => boton.addEventListener("click", (event) => {
                     const botonId = event.currentTarget.id;
-                    console.log(botonId);
                     modalPokemons(botonId);
                 }));
               }
@@ -233,7 +240,15 @@ export default{
                 const URL = "https://pokeapi.co/api/v2/pokemon/";
                 const response = await fetch(URL + pokemon);
                 const data = await response.json();   
-                mostrarModal(data);
+                const URL2 = "https://pokeapi.co/api/v2/pokemon-species/";
+                const response2 = await fetch(URL2 + pokemon);
+                const data2 = await response2.json();
+                const pokemonData = {
+                    ...data,
+                    ...data2,
+                  };  
+                console.log(pokemonData);
+                mostrarModal(pokemonData);
                 setTimeout(() => {
                     let modal = document.getElementById("myModal");
                     let pokeball = document.querySelector(".pokeball");
@@ -268,6 +283,22 @@ export default{
             });
         }
 
+        function mostrarPokemonSearch(poke) {
+        
+            const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
+            let id = [];
+            let count= 0;
+            
+            ws.postMessage({module: "displaycardsSearch", data: poke})
+            id = ["#pokeSearch"]
+            ws.addEventListener("message", (e)=>{
+            
+            let doc = new DOMParser().parseFromString(e.data, "text/html");
+    
+            document.querySelector(id[count]).append(...doc.body.children);
+            (id.length-1==0) ? ws.terminate(): count++;
+            });
+        }
         function mostrarModal(poke) {
             removerModal();
             const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
