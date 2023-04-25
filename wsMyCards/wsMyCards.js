@@ -155,7 +155,7 @@ export let wsMyCards = {
                                 <div class="stats">
                                     <h2>Total</h2>
                                     <div class="barra">
-                                        <div class="progreso" style="--w:${p1.stats[0].base_stat + p1.stats[1].base_stat + p1.stats[2].base_stat + p1.stats[3].base_stat + p1.stats[4].base_stat + p1.stats[5].base_stat}px"></div>
+                                        <div class="progreso" style="--w:100%"></div>
                                     </div>
                                     <h2>${p1.stats[0].base_stat + p1.stats[1].base_stat + p1.stats[2].base_stat + p1.stats[3].base_stat + p1.stats[4].base_stat + p1.stats[5].base_stat}</h2>
                                 </div>

@@ -36,9 +36,8 @@ export default{
         setTimeout(() => {
             const region = document.querySelector("#region");
             const botonesHeader = document.querySelectorAll(".btn-header");
-            var regionValoe = region.value;
-            addEventListener("change", (e)=>{ 
-                regionValoe = region.value;
+            region.addEventListener("change", (e)=>{ 
+                let regionValoe = region.value;
                 switch (regionValoe) {
                     
                     case "Kanto":
@@ -178,7 +177,7 @@ export default{
                 cooldownRegion();
                 });
                 
-          }, 90);
+          }, 1000);
          
 
             async function getPokemons(pokedexInicial, pokedexFinal) {
