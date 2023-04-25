@@ -76,8 +76,106 @@ export let wsMyCards = {
                     <!--Dato curioso de Un friky del pokemon: la pokeApi tiene un error con el peso y altura de los pokemons, el verdadero peso se consigue al dividir la data proporcionada por la api en 10 :4-->
                     <p class="stat">${(p1.weight)/10}kg</p>
                 </div>
+                <button class="btn modalBtn" id="${p1.id}" type="submit">Abrir Modal</button>
             </div>
+            
         <div>
+        
+        `
+    },
+
+
+    displayModal(p1){
+        return`
+            <div class="modalBonito">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                            <div class="texto-container">
+                                <h1>${p1.name}</h1>
+                                ${p1.types.map((type) => `<p class="${type.type.name} tipo">${type.type.name}</p>`)}
+                            </div>
+                            <br>
+                            <br>
+                            <div class="imagen-container">
+                            <div class="image-wrapper">
+                                <img src="${(p1.id >= 650 && p1.id <= 905) ? p1.sprites.other.home.front_default :  (p1.id <= 649 ? p1.sprites.versions["generation-v"]["black-white"].animated.front_default : p1.sprites.other["official-artwork"].front_default)}" alt="Imagen 1" class="imagen">
+                                <span class="image-text">Forma Normal</span>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="${(p1.id >= 650 && p1.id <= 905) ? p1.sprites.other.home.front_shiny :  (p1.id <= 649 ? p1.sprites.versions["generation-v"]["black-white"].animated.front_shiny : p1.sprites.other["official-artwork"].front_shiny)}" alt="Imagen 2" class="imagen">
+                                <span class="image-text">Forma Variocolor</span>
+                            </div>
+                            </div>
+                            <div class="pokemon-tipos">
+                            </div>
+                            <div class="contenedor">
+                                <h1>Caracteristicas</h1>
+                                <div class="stats">
+                                    <h2>HP</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[0].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[0].base_stat}</h2>
+                                </div>
+                                <br>
+                                <div class="stats">
+                                    <h2>Ataque</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[1].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[1].base_stat}</h2>
+                                </div>
+                                <br>
+                                <div class="stats">
+                                    <h2>Defensa</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[2].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[2].base_stat}</h2>
+                                </div>
+                                <br>
+                                <div class="stats">
+                                    <h2>Ataque Especial</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[3].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[3].base_stat}</h2>
+                                </div>
+                                <br>
+                                <div class="stats">
+                                    <h2>Defensa Especial</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[4].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[4].base_stat}</h2>
+                                </div>
+                                <br>
+                                <div class="stats">
+                                    <h2>Velocidad</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[5].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[5].base_stat}</h2>
+                                </div>
+                                <br>
+                                <div class="stats">
+                                    <h2>Total</h2>
+                                    <div class="barra">
+                                        <div class="progreso" style="--w:${p1.stats[0].base_stat + p1.stats[1].base_stat + p1.stats[2].base_stat + p1.stats[3].base_stat + p1.stats[4].base_stat + p1.stats[5].base_stat}px"></div>
+                                    </div>
+                                    <h2>${p1.stats[0].base_stat + p1.stats[1].base_stat + p1.stats[2].base_stat + p1.stats[3].base_stat + p1.stats[4].base_stat + p1.stats[5].base_stat}</h2>
+                                </div>
+                                </div>
+                            </div>
+                                    <br>
+                                    <br>
+                                    <div class="center-on-page">
+                                
+                                        <div class="pokeball">
+                                        <div class="pokeball__button"></div>
+                                        </div>
+                                    </div>
+                                </div>
         `
     },
 

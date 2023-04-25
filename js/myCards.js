@@ -6,6 +6,12 @@ const remover = function remover() {
         divPokemons[i].remove();
       }
 }
+const removerModal = function removerModal() {
+    var divPokemons = document.querySelectorAll(".modalBonito");
+    for (var i = 0; i < divPokemons.length; i++) {
+        divPokemons[i].remove();
+      }
+}
 const cooldownRegion = function cooldownRegion() {setTimeout(() => {region.disabled = false;}, 5000)};
 const cooldownElemental = function cooldownElemental(boton) {setTimeout(() => {boton.disabled = false;}, 5000)};
 const desactivateElemental = function desactivateElemental(botonesHeader) {botonesHeader.forEach((boton) => {boton.disabled = true;setTimeout(() => {cooldownElemental(boton); }, 100);});
@@ -178,8 +184,13 @@ export default{
                 for (let i = pokedexInicial; i <= pokedexFinal; i++) {
                   const response = await fetch(URL + i);
                   const data = await response.json();
+                  console.log(data);
                   mostrarPokemon(data);
                 }
+                /*Se pone el siguiente settiemour para solucionar problemas de accionacion de los botones */
+                setTimeout(() => {
+                modalClick();
+                }, 100);
               }
 
             async function typePokemons(pokedexInicial, pokedexFinal, botonId) {
@@ -207,7 +218,39 @@ export default{
                   const data = await response.json();
                   mostrarPokemon(data);
               }
-        
+
+              async function modalClick() {
+                const openModal = document.querySelectorAll(".modalBtn");
+                console.log(openModal);
+                openModal.forEach(boton => boton.addEventListener("click", (event) => {
+                    const botonId = event.currentTarget.id;
+                    console.log(botonId);
+                    modalPokemons(botonId);
+                }));
+              }
+
+              async function modalPokemons(pokemon) {
+                const URL = "https://pokeapi.co/api/v2/pokemon/";
+                const response = await fetch(URL + pokemon);
+                const data = await response.json();   
+                mostrarModal(data);
+                setTimeout(() => {
+                    let modal = document.getElementById("myModal");
+                    let pokeball = document.querySelector(".pokeball");
+                    pokeball.classList.add("open");
+                    modal.style.display = "block";
+                    pokeball.classList.remove("open");
+                    let closeButton = document.querySelector(".close");
+                    closeButton.addEventListener("click", (e)=>{
+                        modal.style.display = "none";
+                    })
+                    window.onclick = function(event) {
+                    if (event.target == modal) {
+                    modal.style.display = "none";}
+                    }
+                }, 300);
+              }
+              
         function mostrarPokemon(poke) {
         
             const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
@@ -224,6 +267,24 @@ export default{
             (id.length-1==0) ? ws.terminate(): count++;
             });
         }
+
+        function mostrarModal(poke) {
+            removerModal();
+            const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
+            let id = [];
+            let count= 0;
+            
+            ws.postMessage({module: "displayModal", data: poke})
+            id = ["#myModal"]
+            ws.addEventListener("message", (e)=>{
+            
+            let doc = new DOMParser().parseFromString(e.data, "text/html");
+    
+            document.querySelector(id[count]).append(...doc.body.children);
+            (id.length-1==0) ? ws.terminate(): count++;
+            });
+        }
+        
 
         /* Apartado para el modo noche y dia*/
         
@@ -245,12 +306,5 @@ export default{
             imageSection.style.backgroundImage = "url('./css/fondolunala.jpg')";
             headerSection.style.backgroundImage = "url('./css/ultraluna.jpg')";
         })
-    } 
-       
+    }
 }
-
-
-
-
-
-
