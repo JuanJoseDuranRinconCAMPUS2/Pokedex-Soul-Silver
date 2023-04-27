@@ -21,13 +21,17 @@ const removerModal = function removerModal() {
 async function getPokemons(pokedexInicial, pokedexFinal) {
   const URL = "https://pokeapi.co/api/v2/pokemon/";
   const promises = [];
+  
   for (let i = pokedexInicial; i <= pokedexFinal; i++) {
     const response = await fetch(URL + i);
     const data = await response.json();
     // promises.push(data);
     mostrarPokemon(data)
   }
-  modalClick();
+  setTimeout(() => {
+    modalClick();
+  }, 100);
+  
   // const pokemons = await Promise.all(promises);
   // console.log(pokemons);
   // pokemons.forEach(pokemon =>  mostrarPokemon(pokemon));
@@ -99,14 +103,10 @@ async function getBusqueda(pokemon) {
   const URL = "https://pokeapi.co/api/v2/pokemon/";
   const response = await fetch(URL + pokemon);
   const data = await response.json();
-  const getpromise = new Promise((resolve, reject) => {
-    mostrarPokemonSearch(data);
-    resolve();
-  });
-  
-  getpromise.then((mybusqueda) => {
+  mostrarPokemonSearch(data);
+  setTimeout(() => {
     modalClick();
-  }); 
+  }, 100);
     
 }
 
