@@ -9,7 +9,7 @@ export let Operations = {
           }
     }
 };
-import { wsMyCards } from "/wsMyCards/wsMyCards.js";
+import { wsMyCards } from "../wsMyCards/wsMyCards.js";
 
 const removerModal = function removerModal() {
     var divPokemons = document.querySelectorAll(".modalBonito");
