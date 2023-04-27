@@ -1,6 +1,6 @@
-import { Operations} from "/js/myCards.js";
+import { Operations} from "../js/myCards.js";
 
-import myCards from "/js/myCards.js";
+import myCards from "../js/myCards.js";
 
 let pokedexInicial = 0;
 let pokedexFinal = 0;
