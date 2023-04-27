@@ -7,7 +7,24 @@ let pokedexFinal = 0;
 
 let removerPromesa;
 export let wsMyCards = {
-    
+        async getPokemons(pokedexInicial, pokedexFinal) {
+            const URL = "https://pokeapi.co/api/v2/pokemon/";
+            const promises = [];
+            
+            for (let i = pokedexInicial; i <= pokedexFinal; i++) {
+              const response = await fetch(URL + i);
+              const data = await response.json();
+              // promises.push(data);
+              myCards.mostrarPokemon(data)
+            }
+            setTimeout(() => {
+                myCards.modalClick();
+            }, 100);
+            
+            // const pokemons = await Promise.all(promises);
+            // console.log(pokemons);
+            // pokemons.forEach(pokemon =>  mostrarPokemon(pokemon));
+          },
     displaySearch(p1){
         return`
         <form id="busqueda">
@@ -398,7 +415,42 @@ export let wsMyCards = {
             console.error(error);
           }); 
       },
-
+      forApi(){
+        function getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader) {
+            return new Promise((resolve, reject) => {
+              wsMyCards.forApi()
+              getPokemons(pokedexInicial, pokedexFinal)
+                .then(() => {
+                  console.log("Terminé de iterar");
+                  Operations.cooldownRegion();
+                  Operations.desactivateElemental(botonesHeader);
+                  resolve();
+                })
+                .catch((error) => {
+                  reject(error);
+                });
+            });
+          }
+        
+        async function getPokemons(pokedexInicial, pokedexFinal) {
+            const URL = "https://pokeapi.co/api/v2/pokemon/";
+            const promises = [];
+            
+            for (let i = pokedexInicial; i <= pokedexFinal; i++) {
+              const response = await fetch(URL + i);
+              const data = await response.json();
+              // promises.push(data);
+              mostrarPokemon(data)
+            }
+            setTimeout(() => {
+              modalClick();
+            }, 100);
+            
+            // const pokemons = await Promise.all(promises);
+            // console.log(pokemons);
+            // pokemons.forEach(pokemon =>  mostrarPokemon(pokemon));
+          }
+      },
       busquedaPokemons(){
         const mybusquedaPromise = new Promise((resolve, reject) => {
             const mybusqueda = document.querySelector("#busqueda");

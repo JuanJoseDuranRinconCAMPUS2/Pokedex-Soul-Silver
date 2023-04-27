@@ -18,27 +18,10 @@ const removerModal = function removerModal() {
       }         
 }
 
-async function getPokemons(pokedexInicial, pokedexFinal) {
-  const URL = "https://pokeapi.co/api/v2/pokemon/";
-  const promises = [];
-  
-  for (let i = pokedexInicial; i <= pokedexFinal; i++) {
-    const response = await fetch(URL + i);
-    const data = await response.json();
-    // promises.push(data);
-    mostrarPokemon(data)
-  }
-  setTimeout(() => {
-    modalClick();
-  }, 100);
-  
-  // const pokemons = await Promise.all(promises);
-  // console.log(pokemons);
-  // pokemons.forEach(pokemon =>  mostrarPokemon(pokemon));
-}
+
 function getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader) {
     return new Promise((resolve, reject) => {
-      getPokemons(pokedexInicial, pokedexFinal)
+      wsMyCards.getPokemons(pokedexInicial, pokedexFinal)
         .then(() => {
           console.log("Terminé de iterar");
           Operations.cooldownRegion();
@@ -65,6 +48,8 @@ function getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader) {
     document.querySelector(id[count]).append(...doc.body.children);
     (id.length-1==0) ? ws.terminate(): count++;
     });
+
+    
 }
 
 
@@ -128,12 +113,28 @@ function mostrarPokemonSearch(poke) {
 }
 
 async function modalClick() {
-  const openModal = document.querySelectorAll(".modalBtn");
-  console.log(openModal);
-  openModal.forEach(boton => boton.addEventListener("click", (event) => {
+  const modalsPromesa = new Promise((resolve, reject) => {
+    const openModal = document.querySelectorAll(".modalBtn");
+    if (openModal) {
+      resolve(openModal);
+     
+    } else {
+      reject(new Error("El elemento #openModal no se encontró en el DOM"));
+    }
+  });
+  modalsPromesa.then((openModal) => {
+    console.log(openModal);
+    openModal.forEach(boton => boton.addEventListener("click", (event) => {
+    console.log("hola");
       const botonId = event.currentTarget.id;
       modalPokemons(botonId);
   }));
+    
+}).catch((error) => {
+    console.error(error);
+});
+
+ 
 }
 
 async function modalPokemons(pokemon) {
@@ -186,6 +187,8 @@ export default{
     getPokemonsPromise,
     typePokemonsPromise,
     getBusqueda,
+    mostrarPokemon,
+    modalClick,
     showHeader(){
         const wsHeaderPromise = new Promise((resolve)=>{
             const ws = new Worker("./wsMyCards/wsMyCards.js", {type: "module"});
