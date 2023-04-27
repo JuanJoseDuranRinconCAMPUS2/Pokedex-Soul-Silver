@@ -1,6 +1,6 @@
 import { Operations} from "/js/myCards.js";
 
-import getPokemonsPromise from "/js/myCards.js";
+import myCards from "/js/myCards.js";
 
 let pokedexInicial = 0;
 let pokedexFinal = 0;
@@ -8,7 +8,15 @@ let pokedexFinal = 0;
 let removerPromesa;
 export let wsMyCards = {
     
-
+    displaySearch(p1){
+        return`
+        <form id="busqueda">
+            <label for="search">Search</label>
+            <input required="" type="text" class="input" id="search" name="pokemonSelect">
+            <span class="caret"></span>
+        </form>
+        `
+    },
     displayHeader(p1){
         return`
         <nav class="nav">
@@ -181,15 +189,6 @@ export let wsMyCards = {
                                 </div>
         `
     },
-    displaySearch(p1){
-        return`
-        <form id="busqueda">
-            <label for="search">Search</label>
-            <input required="" type="text" class="input" id="search" name="pokemonSelect">
-            <span class="caret"></span>
-        </form>
-        `
-    },
     displaycardsSearch(p1){
         
 
@@ -244,7 +243,7 @@ export let wsMyCards = {
                         removerPromesa.then(() => {
                             pokedexInicial = 1;
                             pokedexFinal = 151;
-                            getPokemonsPromise.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
                             
                           }).catch((error) => {
                             console.error(error);
@@ -260,90 +259,123 @@ export let wsMyCards = {
                         removerPromesa.then(() => {
                             pokedexInicial = 152;
                             pokedexFinal = 251;
-                            getPokemonsPromise.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
                             
                         }).catch((error) => {
                             console.error(error);
                         });
                     break;
                     case "Hoenn":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 252;
-                                pokedexFinal = 386;
-                                this.getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
-                                desactivateElemental(botonesHeader);
-                            }, 0);      
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 252;
+                            pokedexFinal = 386;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                     break;
                      case "Sinnoh":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 387;
-                                pokedexFinal = 493;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 387;
+                            pokedexFinal = 493;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break; 
                      case "Teselia":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 494;
-                                pokedexFinal = 649;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 494;
+                            pokedexFinal = 649;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break;
                      case "Kalos":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 650;
-                                pokedexFinal = 721;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 650;
+                            pokedexFinal = 721;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break; 
                      case "Alola":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 722;
-                                pokedexFinal = 809;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 722;
+                            pokedexFinal = 809;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break;
                      case "Galar":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 810;
-                                pokedexFinal = 898;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                cooldownRegion();
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 810;
+                            pokedexFinal = 898;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break;
                      case "Hisui":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 899;
-                                pokedexFinal = 905;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                region.disabled = false;
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 899;
+                            pokedexFinal = 905;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break;
                      case "Paldea":
-                        remover();
-                            setTimeout(() => {
-                                pokedexInicial = 906;
-                                pokedexFinal = 1009;
-                                getPokemons(pokedexInicial, pokedexFinal);
-                                desactivateElemental(botonesHeader);
-                            }, 0);
+                        removerPromesa = new Promise((resolve, reject) => {
+                            Operations.remover();
+                            resolve();
+                          });
+                        removerPromesa.then(() => {
+                            pokedexInicial = 906;
+                            pokedexFinal = 1009;
+                            myCards.getPokemonsPromise(pokedexInicial, pokedexFinal, botonesHeader);
+                            
+                        }).catch((error) => {
+                            console.error(error);
+                        });     
                      break;
                 }
                 region.disabled = true;
@@ -357,40 +389,35 @@ export let wsMyCards = {
                 botonesHeader.forEach((boton) => {
                     boton.disabled = true;
                     region.disabled = true;
-                    setTimeout(() => {
-                        cooldownElemental(boton);  
-                        
-                    }, 100);
                   });
-                remover();
-                setTimeout(() => {
-                    typePokemons(pokedexInicial, pokedexFinal, botonId);
-                    cooldownRegion();         
-                }, 100);
-            
-               
-            }))
-    
                 
-            // const mybusqueda = document.querySelector("#busqueda");
-            // mybusqueda.addEventListener("click", (e)=>{
-            //     e.preventDefault();
-            // })
-            
-            // mybusqueda.addEventListener("submit",(e)=>{
-            //     e.preventDefault();
-            //     let data = Object.fromEntries(new FormData(e.target));
-            //     getBusqueda(data.pokemonSelect);
-            //     cooldownRegion();
-            //     });
+                Operations.remover();
+                myCards.typePokemonsPromise(pokedexInicial, pokedexFinal, botonId, botonesHeader)         
+            }));
           }).catch((error) => {
             console.error(error);
           }); 
       },
 
-      cargapokemons(){
-        
-      }
+      busquedaPokemons(){
+        const mybusquedaPromise = new Promise((resolve, reject) => {
+            const mybusqueda = document.querySelector("#busqueda");
+            if (mybusqueda) {
+              resolve(mybusqueda);
+             
+            } else {
+              reject(new Error("El elemento #mybusqueda no se encontró en el DOM"));
+            }
+          });
+          
+          mybusquedaPromise.then((mybusqueda) => {
+            mybusqueda.addEventListener("submit",(e)=>{
+                e.preventDefault();
+                let data = Object.fromEntries(new FormData(e.target));
+                myCards.getBusqueda(data.pokemonSelect);
+                });
+          }); 
+      },
 }
 
 

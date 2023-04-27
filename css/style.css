@@ -477,6 +477,7 @@ select {
     align-items: center;
     justify-content: space-evenly;
     display: none;
+    z-index: 9;
 }
 
 .container-intercambio .panel.active{
